@@ -4,7 +4,8 @@
   "private": true,
   "dependencies": {
     "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "react-dom": "^15.6.1",
+    "react-sticky": "^6.0.1"
   },
   "devDependencies": {
     "eslint": "^4.6.0",

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { StickyContainer, Sticky } from 'react-sticky';
 
 const trackWidth = 3000;
 const headerBlockWidth = 100;
@@ -13,29 +14,40 @@ class App extends Component {
     const laneArray = Array(12).fill(0);
     return (
       <div>
-        <div style={{ width: trackWidth, display: 'flex', flexDirection: 'column' }}>
-          <div style={{ background: cyan900, height: 150, display: 'flex' }}>
+        <StickyContainer style={{ width: trackWidth, display: 'flex', flexDirection: 'column' }}>
+          <Sticky>
             {
-              headerArray.map((val, i) => (
-                <div key={i} style={{ borderRight: '1px solid white', height: 150, width: headerBlockWidth }} />
-              ))
+              ({ style }) => (
+                <div style={style}>
+                  <div style={{ background: cyan900, height: 150, display: 'flex' }}>
+                    {
+                      headerArray.map((val, i) => (
+                        <div key={i} style={{ borderRight: '1px solid white', height: 150, width: headerBlockWidth }} />
+                      ))
+                    }
+                  </div>
+                </div>
+              )
             }
-          </div>
-          <div style={{ position: 'realtive'}}>
+          </Sticky>
+          <div>
             <div>
               {
                 laneArray.map((lane, i) => (
-                  <div style={{ width: trackWidth, height: trackHeight, background: colors[i] }}>
-                    <div >{colors[i]}</div>
+                  <div key={i} style={{ width: trackWidth, height: trackHeight, background: colors[i] }}>
+                    <div>{colors[i]}</div>
                   </div>
                 ))
               }
             </div>
           </div>
-        </div>
+        </StickyContainer>
       </div>
     );
   }
 }
 
 export default App;
+
+
+// style={{ width: trackWidth, display: 'flex', flexDirection: 'column' }}
