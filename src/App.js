@@ -13,8 +13,8 @@ class App extends Component {
     const headerArray = Array(trackWidth / headerBlockWidth).fill(0);
     const laneArray = Array(12).fill(0);
     return (
-      <div>
-        <StickyContainer style={{ width: trackWidth, display: 'flex', flexDirection: 'column' }}>
+      <StickyContainer>
+        <div style={{ width: trackWidth }}>
           <Sticky>
             {
               ({ style }) => (
@@ -31,23 +31,28 @@ class App extends Component {
             }
           </Sticky>
           <div>
-            <div>
-              {
-                laneArray.map((lane, i) => (
-                  <div key={i} style={{ width: trackWidth, height: trackHeight, background: colors[i] }}>
-                    <div>{colors[i]}</div>
-                  </div>
-                ))
-              }
-            </div>
+            {
+              laneArray.map((lane, i) => (
+                <div key={i} style={{ width: trackWidth, height: trackHeight, background: colors[i], 
+                  display: 'flex', position: 'relative' }}>
+                  <Sticky>
+                    {
+                      ({ style }) => (
+                        <div style={{ position: 'absolute', top: 0, left: style.left ? style.left * -1 : 0 }}>
+                          {colors[i]}
+                        </div>
+                      )
+                    }
+                  </Sticky>
+                  <div>Other Stuff</div>
+                </div>
+              ))
+            }
           </div>
-        </StickyContainer>
-      </div>
+        </div>
+      </StickyContainer>
     );
   }
 }
 
 export default App;
-
-
-// style={{ width: trackWidth, display: 'flex', flexDirection: 'column' }}
